@@ -1,6 +1,6 @@
 classdef FIELD
-    %FIELD Summary of this class goes here
-    %   Detailed explanation goes here
+    %FIELD superclass of PPDU Fields
+    %   This should be the superclass of class DATA and SIGNAL
     
     properties
         bin
