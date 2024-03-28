@@ -36,10 +36,15 @@ data = data.convolver_tx(data.scrambled, code_rate);
 data = data.interleaver_tx(data.convoluted, code_rate);
 %% DATA 调制
 data = data.modulator(data.interleaved, code_rate);
+%% DATA 添加导频
+data = data.pilot(data.modulated);
+%% DATA 进行 IFFT64 运算
+data
+data = data.IFFT64(data.piloted);
+data
 %% SIGNAL FIELD生成
 % SIGNAL used in PPDU
 signal = SIGNAL(RATE, psdu.length);
-
 %% PREAMBLE产生
 % Preamable used in PPDU
     % preamable.short
