@@ -3,8 +3,9 @@ classdef PREAMBLE
     %   This Object generates preamble sequence for 802.11a
     
     properties
-        preamble_short
-        preamble_long
+        short
+        long
+        full
     end
     properties(Access = private)
         % Train Sequence
@@ -21,10 +22,13 @@ classdef PREAMBLE
             %PREAMBLE Construct an instance of this class
             % use methods to calculate the short and long sequences of
             % preamble
-            obj.preamble_short = obj.Get_Preamble_Short();
-            obj.preamble_long = obj.Get_Preamble_Long();
+            obj.short = obj.Get_Preamble_Short();
+            obj.long = obj.Get_Preamble_Long();
+            obj.full = [obj.short;obj.long];
         end
         
+    end
+    methods(Access = private)
         % generate short sequence
         function preamble_short = Get_Preamble_Short(obj)
             short_demap = zeros(64, 1);                                           
@@ -44,12 +48,6 @@ classdef PREAMBLE
             preamble_long_unit=sqrt(64)*ifft(sqrt(64/52)*long_demap); 
             preamble_long = [preamble_long_unit(33:64,:); preamble_long_unit; ...
                 preamble_long_unit];  
-        end
-        %return a constructed bit string
-        %something like 
-        % raw_bit_data = uint8([1, 0, 1, 1, 0, 0, 1, 0]); % Example raw bit data
-        function preamble = get(obj)
-            preamble = [obj.preamble_short,obj.preamble_long];
         end
     end
 end
