@@ -5,10 +5,15 @@ classdef PPDU
         data
     end
     methods
-        function obj = PPDU(signal_rate, psdu)
-            obj.preamble = PREAMBLE();
-            obj.signal = SIGNAL(signal_rate, length(psdu));
-            obj.data = DATA() %TODO
+        function obj = PPDU(preamble, signal,data)
+            obj.preamble = preamble;
+            obj.signal = signal;
+            obj.data = data;
+        end
+
+        function modulation_signal()
+        end
+        function modulation_data()
         end
     end
 end

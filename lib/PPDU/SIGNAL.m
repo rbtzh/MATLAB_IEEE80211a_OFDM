@@ -7,6 +7,7 @@ classdef SIGNAL
         length
         parity = 0
         tail = zeros(1,6)
+        bin
     end
     
     methods
@@ -16,10 +17,7 @@ classdef SIGNAL
             zero1 = zeros(1, 12 - length(dec));
             binRate = str2num(dec(:))'; %#ok<ST2NM>
             obj.length = [zero1 binRate];
-        end
-        
-        function outputArg = get(obj)
-            outputArg = [obj.rate obj.reserved obj.length obj.parity obj.tail];
+            obj.bin = [obj.rate obj.reserved obj.length obj.parity obj.tail];
         end
     end
 end
