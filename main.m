@@ -10,13 +10,13 @@ disp('#############################################');
 %% 初始化
 % initialization
 % Get some essential value from user using dialog
-[trans_rate,message,scrambling_seed] = showDialog();
+[trans_rate,message,scrambling_seed] = INITUTILS.show_dialog();
 
 
 %% 信源 MAC地址配置 MAC层成帧 SERVICE FIELD生成
 % calculation of MAC layer data passed to PHY layer
 % Do someting rate specified configuration
-[RATE, code_rate, Pad_Bits, Tail, SERVICE] = rateHandler(trans_rate);
+[RATE, code_rate, Pad_Bits, Tail, SERVICE] = INITUTILS.rate_handler(trans_rate);
 
 %% 生成 PSDU
 % PSDU construction
@@ -89,4 +89,3 @@ preamable = PREAMBLE();
 %% 生成 PPDU
 % PPDU construction
 ppdu = PPDU(preamable, signal, data);
-
