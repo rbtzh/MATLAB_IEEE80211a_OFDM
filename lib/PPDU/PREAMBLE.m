@@ -5,7 +5,7 @@ classdef PREAMBLE
     properties
         short
         long
-        full
+        content
     end
     properties(Access = private)
         % Train Sequence
@@ -24,7 +24,7 @@ classdef PREAMBLE
             % preamble
             obj.short = obj.Get_Preamble_Short();
             obj.long = obj.Get_Preamble_Long();
-            obj.full = [obj.short;obj.long];
+            obj.content = [obj.short;obj.long].';
         end
         
     end

@@ -27,14 +27,12 @@ classdef DATA
         function obj = scrambler(obj, in, seed) 
             data_length=length(in);
             
-            scramb_temp = zeros(1,127)
+            scramb_temp = zeros(1,127);
             for i =1:127                                                   
                 Temp = xor(seed(4),seed(7));
                 seed = [Temp,seed(1,1:6)];
                 scramb_temp(i) = Temp;      
             end
-
-            disp(scramb_temp)
 
             out_temp=repmat(scramb_temp,1,ceil(data_length/length(scramb_temp)));
             scramb_temp=out_temp(1:data_length);
@@ -142,7 +140,7 @@ classdef DATA
             obj.piloted = mod_ofdm_syms(:).';
         end
 
-        function obj = IFFT64(obj, in);
+        function obj = IFFT64(obj, in)
             %IFFT64：信号由频域变换到时域
             UsedSubcIdx=[7:32 34:59]';%使用的子载波索引
             NumSubc=52;%子载波数
@@ -165,12 +163,12 @@ classdef DATA
             obj.ifft64ed = time_syms;
         end
 
-        function obj = cyclic_prefix(obj, time_syms)
-            num_symbols = size(time_syms, 2)/64;      %需要传输的符号数（每符号有64数据码元）
+        function obj = cyclic_prefix(obj, in)
+            num_symbols = size(in, 2)/64;      %需要传输的符号数（每符号有64数据码元）
             time_signal = zeros(1, num_symbols*80);   %产生时域信号的初始状态；
             
             % 增加循环前缀
-            symbols = reshape(time_syms(:), 64, num_symbols);
+            symbols = reshape(in(:), 64, num_symbols);
             tmp_syms = [symbols(49:64,:); symbols];    %取一个符号后16bit
             tmp_syms(1,:)=tmp_syms(1,:)*0.5;           %对符号的首尾进行加窗处理
             tmp_syms_end(1,:)=symbols(1,:)*0.5;
