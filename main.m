@@ -15,7 +15,7 @@ disp('#############################################\n\n');
 %% 信源 MAC地址配置 MAC层成帧 SERVICE field生成
 
 % Do someting rate specified configuration
-[RATE, code_rate, Pad_Bits, Tail, SERVICE ] = rateHandler(trans_rate);
+[RATE, code_rate, Pad_Bits, Tail, SERVICE] = rateHandler(trans_rate);
 
 % raw data without modulation
     % PSDU
@@ -39,9 +39,8 @@ data = data.modulator(data.interleaved, code_rate);
 %% DATA 添加导频
 data = data.pilot(data.modulated);
 %% DATA 进行 IFFT64 运算
-data
 data = data.IFFT64(data.piloted);
-data
+
 %% SIGNAL FIELD生成
 % SIGNAL used in PPDU
 signal = SIGNAL(RATE, psdu.length);
