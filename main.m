@@ -29,7 +29,13 @@ data = DATA(SERVICE, psdu.bin, Tail, Pad_Bits);
 
 %% DATA 加扰
 data = data.scrambler(data.bin, scrambling_seed);
-
+%% DATA 卷积编码
+%TODO change the implementation of this
+data = data.convolver_tx(data.scrambled, code_rate);
+%% DATA 交织编码
+data = data.interleaver_tx(data.convoluted, code_rate);
+%% DATA 调制
+data = data.modulator(data.interleaved, code_rate);
 %% SIGNAL FIELD生成
 % SIGNAL used in PPDU
 signal = SIGNAL(RATE, psdu.length);

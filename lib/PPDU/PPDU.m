@@ -10,10 +10,5 @@ classdef PPDU
             obj.signal = signal;
             obj.data = data;
         end
-
-        function modulation_signal()
-        end
-        function modulation_data()
-        end
     end
 end
