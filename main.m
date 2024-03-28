@@ -1,5 +1,7 @@
-function M = main()
+clear
 clc
-disp("Please choose transmitting rate:")
-flag = input('1. 6mbps\n2. 36mbps TX\n')
+disp('#############################################');
+disp("802.11a OFDM Simulation implemented in MATLAB");
+disp('#############################################\n\n');
+[rate,message,scrambling_seed] = showDialog();
 preamble = Preamble();

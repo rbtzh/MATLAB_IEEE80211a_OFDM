@@ -3,19 +3,11 @@ classdef PPDU
         preamble
         signal
         data
-        
-        signal_rate
-        signal_reserved
-        signal_length
-        signal_parity
-        data_service
-        data_psdu
-        data_tail
-        data_padbits
     end
     methods
-        function obj = PPDU()
+        function obj = PPDU(signal_rate, psdu)
             obj.preamble = PREAMBLE();
+            obj.signal = SIGNAL(signal_rate, length(psdu));
         end
     end
 end

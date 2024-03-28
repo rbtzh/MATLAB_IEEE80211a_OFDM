@@ -1,22 +1,25 @@
 classdef SIGNAL
-    %SIGNAL Summary of this class goes here
-    %   Detailed explanation goes here
+    %SIGANl segment in PPDU
     
     properties
-        Property1
+        rate
+        reserved = 0
+        length
+        parity = 0
+        tail = zeros(1,6)
     end
     
     methods
-        function obj = SIGNAL(inputArg1,inputArg2)
-            %SIGNAL Construct an instance of this class
-            %   Detailed explanation goes here
-            obj.Property1 = inputArg1 + inputArg2;
+        function obj = SIGNAL(rate, PSDU_length)
+            obj.rate = rate;
+            dec = dec2bin(PSDU_length);
+            zero1 = zeros(1, 12 - length(dec));
+            binRate = str2num(dec(:))'; %#ok<ST2NM>
+            obj.length = [zero1 binRate];
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
+        function outputArg = get(obj)
+            outputArg = [obj.rate obj.reserved obj.length obj.parity obj.tail];
         end
     end
 end
