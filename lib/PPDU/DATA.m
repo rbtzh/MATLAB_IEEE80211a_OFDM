@@ -10,6 +10,7 @@ classdef DATA
         modulated
         piloted
         ifft64ed
+        cyclic_prefixed
     end
     
     methods
@@ -141,7 +142,7 @@ classdef DATA
             obj.piloted = mod_ofdm_syms(:).';
         end
 
-        function obj= IFFT64(obj, in);
+        function obj = IFFT64(obj, in);
             %IFFT64：信号由频域变换到时域
             UsedSubcIdx=[7:32 34:59]';%使用的子载波索引
             NumSubc=52;%子载波数
@@ -162,6 +163,21 @@ classdef DATA
             ifft_out = ifft(syms_into_ifft);
             time_syms(1,:) = ifft_out(:).';
             obj.ifft64ed = time_syms;
+        end
+
+        function obj = cyclic_prefix(obj, time_syms)
+            num_symbols = size(time_syms, 2)/64;      %需要传输的符号数（每符号有64数据码元）
+            time_signal = zeros(1, num_symbols*80);   %产生时域信号的初始状态；
+            
+            % 增加循环前缀
+            symbols = reshape(time_syms(:), 64, num_symbols);
+            tmp_syms = [symbols(49:64,:); symbols];    %取一个符号后16bit
+            tmp_syms(1,:)=tmp_syms(1,:)*0.5;           %对符号的首尾进行加窗处理
+            tmp_syms_end(1,:)=symbols(1,:)*0.5;
+            
+            tmp_syms(1,2:num_symbols)=tmp_syms(1,2:num_symbols)+tmp_syms_end(1:num_symbols-1);
+            time_signal(:) = tmp_syms(:).';
+            obj.cyclic_prefixed = time_signal;
         end
 
     end
