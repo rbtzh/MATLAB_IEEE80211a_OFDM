@@ -85,7 +85,7 @@ classdef DATA < FIELD
             block_bits = reshape(in,block_size,length(in)/block_size);%将输入数据按块大小（编码比特Ncbps）分组，一个块分组为1列，共分为length(in_bits)/block_size列
             
             % 第一步转置后每行的索引
-            m_k = block_size/16*mod([0:block_size-1],16)+floor([0:block_size-1]/16);
+            m_k = block_size/16*mod((0:block_size-1),16)+floor((0:block_size-1)/16);
             
             % 第二步转置后每行的索引
             s = max(block_size/96,1);%Max（每子载波的数据比特数/2,1），其中每子载波的数据比特数= block_size/48
@@ -98,9 +98,9 @@ classdef DATA < FIELD
 
         function obj = modulator(obj, in, code_rate)
             if code_rate==1/2
-                obj.modulated = BPSK(in);                                  %映射
+                obj.modulated = obj.BPSK(in);                                  %映射
             elseif code_rate==3/4
-                obj.modulated = QAM16(in);                                %QAM
+                obj.modulated = obj.QAM16(in);                                %QAM
             end
         end
 

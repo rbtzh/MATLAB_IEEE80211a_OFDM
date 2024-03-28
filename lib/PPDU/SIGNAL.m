@@ -83,7 +83,7 @@ classdef SIGNAL < FIELD
             obj.interleaved = idx(:).';
         end
         function obj = modulator(obj, in)
-            obj.modulated = BPSK(in);
+            obj.modulated = obj.BPSK(in);
         end
     end
 end
