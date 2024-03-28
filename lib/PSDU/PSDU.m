@@ -11,7 +11,7 @@ classdef PSDU
         function obj = PSDU(message)
             %PSDU Construct an instance of this class
             %   Detailed explanation goes here
-            IMPORT=message
+            IMPORT=message;
             IN = abs(IMPORT);
             PSDU_vertical = de2bi(IN);
             obj.bin = PSDU_vertical(:)';                            

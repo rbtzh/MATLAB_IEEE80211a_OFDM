@@ -27,12 +27,13 @@ psdu = PSDU(message);
     % data.bin  
 data = DATA(SERVICE, psdu.bin, Tail, Pad_Bits);
 
+%% DATA 加扰
+data = data.scrambler(data.bin, scrambling_seed);
+
 %% SIGNAL FIELD生成
 % SIGNAL used in PPDU
 signal = SIGNAL(RATE, psdu.length);
 
-%% DATA 加扰
-data = data.scrambler(data.bin, scrambling_seed);
 %% PREAMBLE产生
 % Preamable used in PPDU
     % preamable.short

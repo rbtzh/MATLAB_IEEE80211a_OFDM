@@ -6,9 +6,9 @@ function [rate,message,scrambling_seed] = showDialog()
     caUserInput = inputdlg(userPrompt, titleBar, 1, defaultValue);
     if isempty(caUserInput),return,end % Bail out if they clicked Cancel.
     % Convert to floating point from string.
-    rate = str2double(caUserInput{1})
-    message = caUserInput{2}
-    scrambling_seed = str2num(caUserInput{3}) %#ok<ST2NM>
+    rate = str2double(caUserInput{1});
+    message = caUserInput{2};
+    scrambling_seed = str2num(caUserInput{3}); %#ok<ST2NM>
     
     % % Check Transmit Rate
     % if isnan(rate)
