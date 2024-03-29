@@ -1,16 +1,9 @@
-classdef SIGNAL < FIELD
-    %SIGANl segment in PPDU
-    
-    properties(Access=private)
-        rate
-        reserved = 0
-        len
-        parity = 0
-        tail = zeros(1,6)
-    end
+classdef SIGNAL_TX < SIGNAL
+    %SIGNAL_TX 
+    %   
     
     methods
-        function obj = SIGNAL(rate, PSDU_length)
+        function obj = SIGNAL_TX(rate, PSDU_length)
             obj.rate = rate;
             dec = dec2bin(PSDU_length);
             zero1 = zeros(1, 12 - length(dec));
@@ -18,7 +11,8 @@ classdef SIGNAL < FIELD
             obj.len = [zero1 binRate];
             obj.bin = [obj.rate obj.reserved obj.len obj.parity obj.tail];
         end
-        function obj = convolver_tx(obj, in)%加扰后的bit流
+        
+        function obj = convolver(obj, in)%加扰后的bit流
             
             ConvCodeGenPoly=[1 0 1 1 0 1 1;1 1 1 1 0 0 1 ];%生成多项式推出
             
@@ -63,7 +57,7 @@ classdef SIGNAL < FIELD
             obj.convoluted =punctured_bits;
         end
 
-        function obj = interleaver_tx(obj, in)
+        function obj = interleaver(obj, in)
             
             block_size=48; %相应速率对应的每OFDM符号的编码比特数 6M对应48；36m对应192   
             Ofdm_=ceil(length(in)/block_size);%向上取整

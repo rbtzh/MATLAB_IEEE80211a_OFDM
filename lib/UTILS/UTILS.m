@@ -1,8 +1,8 @@
-classdef INITUTILS
+classdef UTILS
     %INITUTILS Summary of this class goes here
     %   Detailed explanation goes here
     methods
-        function obj = INITUTILS()
+        function obj = UTILS()
             %INITUTILS Construct an instance of this class
             %   Detailed explanation goes here
         end
@@ -55,6 +55,16 @@ classdef INITUTILS
                 SERVICE = zeros(1, 16);                                                    %业务位 16bit
             else
                 error("ERROR RATE, PLEASE SELECT BETWEEN 6 AND 36")
+            end
+        end
+        function rate = rate_resolver(in)
+            rate_out=in(1,1:4);
+            if rate_out==[1 1 0 1]
+                rate = 1/2;
+            elseif rate_out==[1 0 1 1] %#ok<*BDSCA> 
+                rate = 3/4;
+            else 
+                error("CODE RATE NOT DETECTED")
             end
         end
     end

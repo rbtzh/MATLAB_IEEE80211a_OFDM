@@ -102,6 +102,22 @@ classdef FIELD
             % ylabel('Q');
             % title('16-QAM星座图');
         end
+        function out = DE_QAM16(~, in)
+            soft_bits = zeros(4*size(in,1), size(in,2));  % 每个符号由4位组成
+            
+            bit0 = real(in);   %实部
+            bit2 = imag(in);   %虚部
+            
+            bit1 = 2/sqrt(10)-(abs(real(in)));
+            bit3 = 2/sqrt(10)-(abs(imag(in)));
+            
+            soft_bits(1:4:size(soft_bits,1),:) = bit0;
+            soft_bits(2:4:size(soft_bits,1),:) = bit1;
+            soft_bits(3:4:size(soft_bits,1),:) = bit2;
+            soft_bits(4:4:size(soft_bits,1),:) = bit3;
+            soft_bits_out_temp = soft_bits(:)';
+            out = soft_bits_out_temp>0;
+        end
         function out = BPSK(~, in)
         
             table=exp(1i*[0 -pi]);  % 生成BPSK序列(欧拉公式)
@@ -111,6 +127,10 @@ classdef FIELD
             % r = real(out);
             % l = imag(out);
             % scatter(r,l,'*');
+        end
+        function out = DE_BPSK(~, rx_symbols)
+
+            out =real(rx_symbols)>0; 
         end
     end
 end

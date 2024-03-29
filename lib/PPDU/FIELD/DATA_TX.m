@@ -1,14 +1,9 @@
-classdef DATA < FIELD
-    %DATA Summary of this class goes here
-    %   Detailed explanation goes here
-    
-    properties
-        scrambled
-    end
+classdef DATA_TX < DATA
+    %DATA_TX is the representation of data field used in transmittion
+    %   
     
     methods
-
-        function obj = DATA(SERVICE, PSDU, Tail, Pad_Bits)
+        function obj = DATA_TX(SERVICE, PSDU, Tail, Pad_Bits)
             %DATA Construct an instance of this class
             %   Detailed explanation goes here
             DATA1 = [SERVICE PSDU Tail Pad_Bits];
@@ -103,7 +98,6 @@ classdef DATA < FIELD
                 obj.modulated = obj.QAM16(in);                                %QAM
             end
         end
-
     end
 end
 
