@@ -10,7 +10,7 @@ disp('#############################################');
 %% 初始化
 % initialization
 % Get some essential value from user using dialog
-[trans_rate,message,scrambling_seed] = UTILS.show_dialog();
+[trans_rate,message,scrambling_seed, snr] = UTILS.show_dialog();
 
 
 %% 信源 MAC地址配置 MAC层成帧 SERVICE FIELD生成
@@ -91,7 +91,7 @@ preamable = PREAMBLE();
 ppdu = PPDU(preamable, signal_tx, data_tx);
 
 %% 通过 AWGN 信道
-ppdu.content = awgn(ppdu.content,5.0); 
+ppdu.content = awgn(ppdu.content,snr); 
 
 %% MAGIC CODE
 

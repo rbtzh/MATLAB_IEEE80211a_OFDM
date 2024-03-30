@@ -9,17 +9,18 @@ classdef UTILS
     end
     methods(Static)
 
-        function [rate,message,scrambling_seed] = show_dialog()
-            defaultValue = {'6', 'Across the Great Wall we can reach every corner in the world.', '[1 0 1 0 1 0 1]'};
+        function [rate,message,scrambling_seed, snr] = show_dialog()
+            defaultValue = {'6', 'Across the Great Wall we can reach every corner in the world.', '[1 0 1 0 1 0 1]','10.0'};
             titleBar = 'Enter values';
-            userPrompt = {'Select Transmit Rate : ', 'Enter Message: ', 'Enter Srambling Seed'};
+            userPrompt = {'Select Transmit Rate : ', 'Enter Message: ', 'Enter Srambling Seed', 'AWGN SNR'};
             caUserInput = inputdlg(userPrompt, titleBar, 1, defaultValue);
             if isempty(caUserInput),return,end % Bail out if they clicked Cancel.
             % Convert to floating point from string.
             rate = str2double(caUserInput{1});
             message = caUserInput{2};
             scrambling_seed = str2num(caUserInput{3}); %#ok<ST2NM>
-            
+            snr = str2double(caUserInput(4));
+
             % % Check Transmit Rate
             % if isnan(rate)
             %     % They didn't enter a number.
