@@ -59,6 +59,19 @@ classdef UTILS
                 error(error_message)
             end
         end
+        function refresh_gui(b6,b36,msg,seed,snr,a1,a2,a3,a4)
+            if b6.Value == true
+                trans_rate = 6;
+            elseif b36.Value == true
+                trans_rate = 36;
+            end
+            message = msg.Value;
+            scrambling_seed = str2num(seed.Value); %#ok<*ST2NM>
+            snr_v = snr.Value;
+            task = TASK(trans_rate, message,scrambling_seed, snr_v);
+            task = task.run();
+            [~, ~] = task.analyze_gui(a1, a2, a3, a4);
+        end
     end
 end
 
