@@ -155,6 +155,26 @@ classdef TASK
             end
             
         end
+        function [errors_signal, errors_data] = analyze_gui(obj, g1, g2, g3, g4)
+            ts = obj.tx_signal;
+            rs = obj.rx_signal;
+            td = obj.tx_data;
+            rd = obj.rx_data;
+
+            %% SIGNAL 检测发送与接收内容差异
+            %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
+            errors_signal = obj.diff(ts.bin,rs.bin, "signal field");
+
+            %% DATA 检测发送与接收内容差异
+            %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
+            errors_data = obj.diff(td.bin, rd.bin, "data field");
+
+            %% 画出星座图
+            %% Draw Constellation diagram
+            obj.iq_figure_constellation_gui(ts, rs, td, rd, obj.code_rate, obj.snr, g1, g2, g3, g4);
+            %% 画出瀑布图
+            
+        end
     end
 
     methods(Static)
@@ -181,7 +201,9 @@ classdef TASK
 
             % Draw Constellation diagram
             figure;
-            sgtitle(sprintf('Constellation Diagram \nData Rate = %d Mbps, AWGN SNR = %d dB', speed, snr))
+            sgt = sgtitle(sprintf('IEEE 802.11a-1999 OFDM Simulation \nConstellation Diagram\nData Rate = %d Mbps, AWGN SNR = %d dB', speed, snr));
+            sgt.FontSize = 15;
+            
             set(gcf,'unit','centimeters','position',[0 0 20 20]);
             % 1. Tx Signal
             subplot(2,2,1);
@@ -230,6 +252,62 @@ classdef TASK
             xlabel('I');
             ylabel('Q');
             title(' Data Field, Rx',title_iq_data);
+        end
+        function iq_figure_constellation_gui(ts, rs, td, rd, rate, snr, fig1, fig2, fig3, fig4)
+            
+            if rate == 1/2
+                title_iq_data = 'BPSK';
+                speed = 6;
+            elseif rate == 3/4
+                title_iq_data = '16QAM';
+                speed = 36;
+            else
+                error("ERROR RATE")
+            end
+
+            % Draw Constellation diagram
+            % 1. Tx Signal
+            r = real(ts.modulated);
+            l = imag(ts.modulated);
+            scatter1 = scatter(fig1,r,l,'*');
+            hold on
+            grid on
+            axis(fig1, [-1 1,-1 1]);
+            xlabel(fig1, 'I');
+            ylabel(fig1, 'Q');
+            title(fig1, 'BPSK Signal Field, Tx','BPSK');
+
+            % 2. Rx Signal
+            r = real(rs.modulated);
+            l = imag(rs.modulated);
+            scatter(fig2, r,l,'*');
+            hold on
+            grid on
+            axis([-0.5 0.5,-0.5 0.5]);
+            xlabel(fig2, 'I');
+            ylabel(fig2, 'Q');
+            title(fig2, 'Signal Field, Rx','BPSK');
+
+            % 3. Tx Data
+            r = real(td.modulated);
+            l = imag(td.modulated);
+            scatter(fig3, r,l,'*');
+            hold on
+            grid on
+            axis(fig3,[-1 1,-1 1]);
+            xlabel(fig3,'I');
+            ylabel(fig3,'Q');
+            title(fig3, ' Data Field, Tx',title_iq_data);
+
+            % 4, Rx Data
+            r = real(rd.modulated);
+            l = imag(rd.modulated);
+            scatter(fig4, r,l,'*');
+            hold on
+            grid on
+            xlabel(fig4,'I');
+            ylabel(fig4,'Q');
+            title(fig4, ' Data Field, Rx',title_iq_data);
         end
     end
         
