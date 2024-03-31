@@ -1,3 +1,94 @@
+%
+% classdef TASK
+%
+% TASK a complete task that can be called
+%   Detailed explanation goes here
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+%   trans_rate       - Transmission rate
+%   message          - Message
+%   scrambling_seed  - Scrambling seed
+%   snr              - Signal-to-Noise Ratio
+%   code_rate        - Code rate
+%   tx_signal        - Transmitted signal
+%   tx_data          - Transmitted data
+%   rx_signal        - Received signal
+%   rx_data          - Received data
+%
+% Methods:
+%
+%   function obj = TASK(trans_rate, message, scrambling_seed, snr)
+%       % TASK Construct an instance of this class
+%       %   Detailed explanation goes here
+%   end
+%
+%   function obj = run(obj)
+%       % METHOD1 Summary of this method goes here
+%       %   Detailed explanation goes here
+%   end
+%
+%   function [errors_signal, errors_data] = analyze(obj, isGraph)
+%       % analyze - Analyze the transmitted and received data
+%       %
+%       % Inputs:
+%       %    isGraph - Flag to indicate if graphs should be plotted
+%       %
+%       % Outputs:
+%       %    errors_signal - Error percentage in signal field
+%       %    errors_data   - Error percentage in data field
+%   end
+%
+%   function [errors_signal, errors_data] = analyze_gui(obj, g1, g2, g3, g4)
+%       % analyze_gui - Analyze the transmitted and received data for GUI
+%       %
+%       % Inputs:
+%       %    g1, g2, g3, g4 - Graph objects for plotting
+%       %
+%       % Outputs:
+%       %    errors_signal - Error percentage in signal field
+%       %    errors_data   - Error percentage in data field
+%   end
+%
+% Methods (Static):
+%
+%   function d = diff(a, b, field)
+%       % diff - Calculate error percentage between two arrays
+%       %
+%       % Inputs:
+%       %    a - Array 1
+%       %    b - Array 2
+%       %    field - Field name for display
+%       %
+%       % Outputs:
+%       %    d - Error percentage
+%   end
+%
+%   function iq_figure_constellation(ts, rs, td, rd, rate, snr)
+%       % iq_figure_constellation - Plot constellation diagram
+%       %
+%       % Inputs:
+%       %    ts, rs - Transmitted and received signal objects
+%       %    td, rd - Transmitted and received data objects
+%       %    rate   - Code rate
+%       %    snr    - Signal-to-Noise Ratio
+%   end
+%
+%   function iq_figure_constellation_gui(ts, rs, td, rd, rate, snr, fig1, fig2, fig3, fig4)
+%       % iq_figure_constellation_gui - Plot constellation diagram for GUI
+%       %
+%       % Inputs:
+%       %    ts, rs - Transmitted and received signal objects
+%       %    td, rd - Transmitted and received data objects
+%       %    rate   - Code rate
+%       %    snr    - Signal-to-Noise Ratio
+%       %    fig1, fig2, fig3, fig4 - Graph objects for plotting
+%   end
+%
 classdef TASK
     % TASK a complete task that can be called
     %   Detailed explanation goes here

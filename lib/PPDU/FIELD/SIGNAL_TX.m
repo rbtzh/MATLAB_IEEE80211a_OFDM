@@ -1,3 +1,45 @@
+%
+% classdef SIGNAL_TX < SIGNAL
+%
+% SIGNAL_TX
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+% Methods:
+%
+%   function obj = SIGNAL_TX(rate, PSDU_length)
+%       % SIGNAL_TX Constructor
+%       %
+%       % Inputs:
+%       %    rate - Rate of the signal
+%       %    PSDU_length - Length of PSDU
+%   end
+%
+%   function obj = convolver(obj, in)
+%       % convolver - Perform convolutional encoding
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = interleaver(obj, in)
+%       % interleaver - Perform interleaving
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = modulator(obj, in)
+%       % modulator - Perform BPSK modulation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
 classdef SIGNAL_TX < SIGNAL
     % SIGNAL_TX
     %

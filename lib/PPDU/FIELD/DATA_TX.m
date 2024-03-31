@@ -1,3 +1,58 @@
+%
+% classdef DATA_TX < DATA
+%
+% DATA_TX is the representation of data field used in transmittion
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+% Methods:
+%
+%   function obj = DATA_TX(SERVICE, PSDU, Tail, Pad_Bits, code_rate)
+%       % DATA_TX Constructor
+%       %
+%       % Inputs:
+%       %    SERVICE    - Service data
+%       %    PSDU       - PSDU data
+%       %    Tail       - Tail bits
+%       %    Pad_Bits   - Padding bits
+%       %    code_rate  - Code rate for convolutional encoding
+%   end
+%
+%   function obj = scrambler(obj, in, seed)
+%       % scrambler - Perform data scrambling
+%       %
+%       % Inputs:
+%       %    in   - Input data
+%       %    seed - Scrambling seed
+%   end
+%
+%   function obj = convolver_tx(obj, in, code_rate)
+%       % convolver_tx - Perform convolutional encoding for transmission
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for convolutional encoding
+%   end
+%
+%   function obj = interleaver_tx(obj, in, code_rate)
+%       % interleaver_tx - Perform interleaving for transmission
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for interleaving
+%   end
+%
+%   function obj = modulator(obj, in, code_rate)
+%       % modulator - Perform modulation based on code rate
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for modulation
+%   end
 classdef DATA_TX < DATA
     % DATA_TX is the representation of data field used in transmittion
     %

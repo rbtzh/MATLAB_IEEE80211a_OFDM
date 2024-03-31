@@ -1,3 +1,67 @@
+%
+% classdef UTILS
+%
+% INITUTILS Summary of this class goes here
+%   Detailed explanation goes here
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Methods:
+%
+%   function obj = UTILS()
+%       % INITUTILS Construct an instance of this class
+%       %   Detailed explanation goes here
+%   end
+%
+%   function [rate, message, scrambling_seed, snr] = show_dialog()
+%       % show_dialog - Display a dialog box to enter values
+%       %
+%       % Outputs:
+%       %    rate - Selected transmit rate
+%       %    message - Entered message
+%       %    scrambling_seed - Entered scrambling seed
+%       %    snr - AWGN Signal-to-Noise Ratio
+%   end
+%
+%   function [RATE, code_rate, Pad_Bits, Tail, SERVICE] = rate_handler(rate)
+%       % rate_handler - Handle rate specified configuration
+%       %
+%       % Inputs:
+%       %    rate - Specified transmission rate
+%       %
+%       % Outputs:
+%       %    RATE - Rate configuration
+%       %    code_rate - Code rate
+%       %    Pad_Bits - Padded bits
+%       %    Tail - Tail bits
+%       %    SERVICE - Service bits
+%   end
+%
+%   function rate = rate_resolver(in)
+%       % rate_resolver - Resolve the transmission rate
+%       %
+%       % Inputs:
+%       %    in - Input data
+%       %
+%       % Output:
+%       %    rate - Resolved rate
+%   end
+%
+%   function refresh_gui(b6, b36, msg, seed, snr, a1, a2, a3, a4, lamp)
+%       % refresh_gui - Refresh the GUI based on user inputs
+%       %
+%       % Inputs:
+%       %    b6 - Button for rate 6
+%       %    b36 - Button for rate 36
+%       %    msg - Message input field
+%       %    seed - Scrambling seed input field
+%       %    snr - SNR input field
+%       %    a1, a2, a3, a4 - Additional parameters
+%       %    lamp - Indicator lamp
+%   end
+%
 classdef UTILS
     % INITUTILS Summary of this class goes here
     %   Detailed explanation goes here

@@ -1,3 +1,25 @@
+%
+% classdef PSDU
+%
+% PSDU Summary of this class goes here
+%   Detailed explanation goes here
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+%   bin    - Binary representation of the message
+%   length - Length of the binary representation
+%
+% Methods:
+%
+%   function obj = PSDU(message)
+%       % PSDU Construct an instance of this class
+%       %   Detailed explanation goes here
+%   end
+%
 classdef PSDU
     % PSDU Summary of this class goes here
     %   Detailed explanation goes here

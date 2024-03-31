@@ -1,3 +1,37 @@
+%
+% classdef PREAMBLE
+%
+% PREAMBLE Summary of this class goes here
+%   This Object generates preamble sequence for 802.11a
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+%   short   - Short preamble sequence
+%   long    - Long preamble sequence
+%   content - Combined content of short and long preamble sequences
+%
+% Methods:
+%
+%   function obj = PREAMBLE()
+%       % PREAMBLE Construct an instance of this class
+%       % use methods to calculate the short and long sequences of
+%       % preamble
+%   end
+%
+% Methods (Access = private):
+%
+%   function preamble_short = Get_Preamble_Short(obj)
+%       % Get_Preamble_Short - Generate short preamble sequence
+%   end
+%
+%   function preamble_long = Get_Preamble_Long(obj)
+%       % Get_Preamble_Long - Generate long preamble sequence
+%   end
+%
 classdef PREAMBLE
     % PREAMBLE Summary of this class goes here
     %   This Object generates preamble sequence for 802.11a

@@ -1,3 +1,91 @@
+%
+% classdef FIELD
+%
+% FIELD superclass of PPDU Fields
+%   This should be the superclass of class DATA and SIGNAL
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+%   bin              - Binary representation
+%   convoluted       - Convoluted data
+%   interleaved      - Interleaved data
+%   modulated        - Modulated data
+%   piloted          - Piloted data
+%   ifft64ed         - IFFT-64 transformed data
+%   cyclic_prefixed  - Cyclic prefixed data
+%
+% Methods:
+%
+%   function obj = FIELD()
+%       % FIELD Constructor
+%       %   Detailed explanation goes here
+%   end
+%
+%   function obj = pilot(obj, in)
+%       % pilot - Perform pilot scrambling
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = IFFT64(obj, in)
+%       % IFFT64 - Perform IFFT-64 transformation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = cyclic_prefix(obj, time_syms)
+%       % cyclic_prefix - Add cyclic prefix to data
+%       %
+%       % Inputs:
+%       %    time_syms - Time domain symbols
+%   end
+%
+%   function out = QAM16(~, in)
+%       % QAM16 - Perform QAM16 modulation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%       %
+%       % Output:
+%       %    out - Modulated data
+%   end
+%
+%   function out = DE_QAM16(~, in)
+%       % DE_QAM16 - Perform QAM16 demodulation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%       %
+%       % Output:
+%       %    out - Demodulated data
+%   end
+%
+%   function out = BPSK(~, in)
+%       % BPSK - Perform BPSK modulation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%       %
+%       % Output:
+%       %    out - Modulated data
+%   end
+%
+%   function out = DE_BPSK(~, rx_symbols)
+%       % DE_BPSK - Perform BPSK demodulation
+%       %
+%       % Inputs:
+%       %    rx_symbols - Received symbols
+%       %
+%       % Output:
+%       %    out - Demodulated data
+%   end
+%
 classdef FIELD
     % FIELD superclass of PPDU Fields
     %   This should be the superclass of class DATA and SIGNAL

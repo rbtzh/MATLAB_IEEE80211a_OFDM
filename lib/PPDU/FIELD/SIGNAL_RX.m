@@ -1,3 +1,42 @@
+%
+% classdef SIGNAL_RX < SIGNAL
+%
+% SIGNAL_RX
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+% Methods:
+%
+%   function obj = SIGNAL_RX(in)
+%       % SIGNAL_RX Constructor
+%       %   Detailed explanation goes here
+%   end
+%
+%   function obj = de_modulator(obj, in)
+%       % de_modulator - Perform BPSK demodulation
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = de_interleaver(obj, in)
+%       % de_interleaver - Perform deinterleaving
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = de_convolver(obj, in, code_rate)
+%       % de_convolver - Perform convolutional decoding
+%       %
+%       % Inputs:
+%       %    in - Input data
+%       %    code_rate - Code rate for convolutional decoding
+%   end
 classdef SIGNAL_RX < SIGNAL
     % SIGNAL_RX
     %

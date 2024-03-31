@@ -1,3 +1,54 @@
+%
+% classdef DATA_RX < DATA
+%
+% DATA_RX
+%
+% Author: Zhao Yanbo (zhaoyanbo@email.com)
+% Date:    Spring 2024
+% Course:  Communication Engineering Program Design II
+%
+% Properties:
+%
+% Methods:
+%
+%   function obj = DATA_RX(in)
+%       % DATA_RX Constructor
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
+%   function obj = de_modulator(obj, in, code_rate)
+%       % de_modulator - Perform demodulation based on code rate
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for demodulation
+%   end
+%
+%   function obj = de_interleaver(obj, in, code_rate)
+%       % de_interleaver - Perform deinterleaving based on code rate
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for deinterleaving
+%   end
+%
+%   function obj = de_convolver(obj, in, code_rate)
+%       % de_convolver - Perform convolutional decoding based on code rate
+%       %
+%       % Inputs:
+%       %    in        - Input data
+%       %    code_rate - Code rate for convolutional decoding
+%   end
+%
+%   function obj = de_scrambler(obj, in)
+%       % de_scrambler - Perform descrambling
+%       %
+%       % Inputs:
+%       %    in - Input data
+%   end
+%
 classdef DATA_RX < DATA
     % DATA_RX 此处显示有关此类的摘要
     %   此处显示详细说明
