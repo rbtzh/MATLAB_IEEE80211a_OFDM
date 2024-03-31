@@ -142,22 +142,28 @@ classdef TASK
 
             %% SIGNAL 检测发送与接收内容差异
             %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
-            xor_signal = xor(ts.bin,rs.bin);
-            ones_signal = numel(find(xor_signal == 1));
-            errors_signal = ones_signal / 24 * 100;
-            sprintf("\t\t*****\nerror in signal field is %f\n\t\t*****", errors_signal)
+            errors_signal = obj.diff(ts.bin,rs.bin, "signal field");
 
             %% DATA 检测发送与接收内容差异
             %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
-            xor_data = xor(td.bin,rd.bin);
-            ones_data = numel(find(xor_data == 1));
-            errors_data = ones_data / 24 * 100;
-            sprintf("\t\t*****\nerror in data field is %f\n\t\t*****", errors_data)
+            errors_data = obj.diff(td.bin,rd.bin, "data field");
 
             %% 画出星座图
 
             %% 画出瀑布图
         end
     end
+
+    methods(Static)
+        function d = diff(a, b, field)
+            xor_signal = xor(a,b);
+            ones_signal = numel(find(xor_signal == 1));
+            d = ones_signal / 24 * 100;
+            if nargin >= 3
+                sprintf("\t\t*****\nerror in %s is %f\n\t\t*****", field, d)
+            end
+        end
+    end
+        
 end
 
