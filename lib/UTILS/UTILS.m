@@ -65,7 +65,8 @@ classdef UTILS
             elseif rate_out==[1 0 1 1] %#ok<*BDSCA> 
                 rate = 3/4;
             else 
-                error("CODE RATE NOT DETECTED")
+                error_message = "CODE RATE NOT DETECTED: " + num2str(rate_out) + " is not [1 1 0 1] or [1 0 1 1]";
+                error(error_message)
             end
         end
     end
