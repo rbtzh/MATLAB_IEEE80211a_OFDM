@@ -3,12 +3,17 @@ classdef DATA_TX < DATA
     %   
     
     methods
-        function obj = DATA_TX(SERVICE, PSDU, Tail, Pad_Bits)
+        function obj = DATA_TX(SERVICE, PSDU, Tail, Pad_Bits, code_rate)
             %DATA Construct an instance of this class
             %   Detailed explanation goes here
             DATA1 = [SERVICE PSDU Tail Pad_Bits];
-            number_bit=ceil(length(DATA1)/24);
-            Pad_Bits=zeros(1,number_bit*24-length(DATA1));
+            if code_rate == 1/2
+                number_bit=ceil(length(DATA1)/24);
+                Pad_Bits=zeros(1,number_bit*24-length(DATA1));
+            elseif code_rate == 3/4
+                number_bit=ceil(length(DATA1)/144);
+                Pad_Bits=zeros(1,number_bit*144-length(DATA1));
+            end
             obj.bin = [SERVICE PSDU Tail Pad_Bits];
         end
 
@@ -28,19 +33,18 @@ classdef DATA_TX < DATA
         end
 
         function obj = convolver_tx(obj, in, code_rate)
-            
             ConvCodeGenPoly=[1 0 1 1 0 1 1;1 1 1 1 0 0 1 ];
-            
+
             number_rows = size(ConvCodeGenPoly, 1);
             number_bits = size(ConvCodeGenPoly,2)+length(in)-1;
             uncoded_bits = zeros(number_rows, number_bits);
-            
+
             for row=1:number_rows
-            
+
              uncoded_bits(row,1:number_bits)=rem(conv(in*1, ConvCodeGenPoly(row,:)),2);
-             
+
             end
-            
+
             coded_bits=uncoded_bits(:);
             coded_bits1=coded_bits(:).';
                 if code_rate == 3/4
@@ -52,17 +56,17 @@ classdef DATA_TX < DATA
                 end
             coded_bits=coded_bits1(1:length(coded_bits1)-12);
             num_rem_bits = rem(length(coded_bits), punc_patt_size);
-            
+
             puncture_table = reshape(coded_bits(1:length(coded_bits)-num_rem_bits), punc_patt_size, fix(length(coded_bits)/punc_patt_size));
 
             tx_table = puncture_table(punc_patt,:);
-            
+
 
             rem_bits = coded_bits(length(coded_bits)-num_rem_bits+1:length(coded_bits));
             rem_punc_patt = find(punc_patt<=num_rem_bits);
             rem_punc_bits=zeros(1,num_rem_bits);
             rem_punc_bits(rem_punc_patt) = rem_bits(rem_punc_patt);
-            
+
             punctured_bits = [tx_table(:)' rem_punc_bits];
             obj.convoluted=punctured_bits;
         end

@@ -38,13 +38,13 @@ classdef TASK
 
             %% 生成 DATA 段
             % DATA field/object construction
-            data_tx = DATA_TX(SERVICE, psdu.bin, Tail, Pad_Bits);            
+            data_tx = DATA_TX(SERVICE, psdu.bin, Tail, Pad_Bits, code_rate_tx);            
             %% DATA 加扰
             % DATA field scrambling
             data_tx = data_tx.scrambler(data_tx.bin, obj.scrambling_seed);          
             %% DATA 卷积编码
             % DATA field convolution encoding
-            data_tx = data_tx.convolver_tx(data_tx.scrambled, code_rate_tx);            
+            data_tx = data_tx.convolver_tx(data_tx.scrambled, code_rate_tx);
             %% DATA 交织编码
             % DATA field interleaved encoding
             data_tx = data_tx.interleaver_tx(data_tx.convoluted, code_rate_tx);            
@@ -146,10 +146,11 @@ classdef TASK
 
             %% DATA 检测发送与接收内容差异
             %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
-            errors_data = obj.diff(td.bin,rd.bin, "data field");
+            errors_data = obj.diff(td.bin, rd.bin, "data field");
 
             %% 画出星座图
-
+            %% Draw Constellation diagram
+            obj.iq_plot(rd.modulated, rt)
             %% 画出瀑布图
         end
     end
@@ -160,8 +161,28 @@ classdef TASK
             ones_signal = numel(find(xor_signal == 1));
             d = ones_signal / 24 * 100;
             if nargin >= 3
-                sprintf("\t\t*****\nerror in %s is %f\n\t\t*****", field, d)
+                sprintf("error in %s is %f", field, d)
             end
+        end
+
+        function iq_plot(modulated, rt)
+            if rt == 1/2
+                title_iq = 'BPSK';
+            elseif rt == 3/4
+                title_iq = '16QAM';
+            else
+                error("ERROR RATE")
+            end
+            % Draw Constellation diagram
+            r = real(modulated);
+            l = imag(modulated);
+            scatter(r,l,'*');
+            hold on
+            grid on
+            axis([-1 1,-1 1]);
+            xlabel('I');
+            ylabel('Q');
+            title(title_iq);
         end
     end
         
