@@ -18,7 +18,6 @@ classdef PREAMBLE
     end
 
     methods
-
         function obj = PREAMBLE()
             % PREAMBLE Construct an instance of this class
             % use methods to calculate the short and long sequences of
@@ -30,18 +29,15 @@ classdef PREAMBLE
 
     end
     methods (Access = private)
-
         % generate short sequence
         function preamble_short = Get_Preamble_Short(obj)
             short_demap = zeros(64, 1);
             short_demap([7:32 34:59], :) = obj.TRAIN_SHORT;
             short_demap([33:64 1:32], :) = short_demap;
-
             preamble_short_unit = sqrt(64) * ifft(sqrt(64 / 52) * short_demap);
             preamble_short_unit = preamble_short_unit(1:16);
             preamble_short = repmat(preamble_short_unit, 10, 1);
         end
-
         % generate long sequence
         function preamble_long = Get_Preamble_Long(obj)
             long_demap = zeros(64, 1);

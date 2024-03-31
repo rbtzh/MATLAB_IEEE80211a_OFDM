@@ -24,16 +24,6 @@ classdef UTILS
             message = caUserInput{2};
             scrambling_seed = str2num(caUserInput{3}); %#ok<ST2NM>
             snr = str2double(caUserInput(4));
-
-            % % Check Transmit Rate
-            % if isnan(rate)
-            %     % They didn't enter a number.
-            %     % They clicked Cancel, or entered a character, symbols, or something else not allowed.
-            %     % Convert the default from a string and stick that into usersValue1.
-            %     usersValue1 = str2num(defaultValue{1});
-            %     message = sprintf('I said it had to be a number.\nTry replacing the user.\nI will use %.2f and continue.', usersValue1);
-            %     uiwait(warndlg(message));
-            % end
         end
 
         function [RATE, code_rate, Pad_Bits, Tail, SERVICE] = rate_handler(rate)

@@ -10,9 +10,7 @@ classdef SIGNAL < FIELD
     end
 
     methods
-
         function obj = SIGNAL()
         end
-
     end
 end
