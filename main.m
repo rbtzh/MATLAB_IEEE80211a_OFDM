@@ -12,5 +12,5 @@ disp('#############################################');
 tic
 task = TASK(trans_rate,message,scrambling_seed, snr);
 task = task.run();
-[error_signal, error_data] = task.analyze();
+[error_signal, error_data] = task.analyze(true);
 toc

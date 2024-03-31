@@ -133,7 +133,7 @@ classdef TASK
      
         end
 
-        function [errors_signal, errors_data] = analyze(obj)
+        function [errors_signal, errors_data] = analyze(obj, isGraph)
             ts = obj.tx_signal;
             rs = obj.rx_signal;
             td = obj.tx_data;
@@ -148,10 +148,13 @@ classdef TASK
             %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
             errors_data = obj.diff(td.bin, rd.bin, "data field");
 
-            %% 画出星座图
-            %% Draw Constellation diagram
-            obj.iq_plot(rd.modulated, rt)
-            %% 画出瀑布图
+            if isGraph
+                %% 画出星座图
+                %% Draw Constellation diagram
+                obj.iq_figure_constellation(ts, rs, td, rd, rt)
+                %% 画出瀑布图
+            end
+            
         end
     end
 
@@ -165,24 +168,66 @@ classdef TASK
             end
         end
 
-        function iq_plot(modulated, rt)
+        function iq_figure_constellation(ts, rs, td, rd, rt)
+            
             if rt == 1/2
-                title_iq = 'BPSK';
+                title_iq_data = 'BPSK';
             elseif rt == 3/4
-                title_iq = '16QAM';
+                title_iq_data = '16QAM';
             else
                 error("ERROR RATE")
             end
+
             % Draw Constellation diagram
-            r = real(modulated);
-            l = imag(modulated);
+            figure;
+            set(gcf,'unit','centimeters','position',[0 0 20 20]);
+            % 1. Tx Signal
+            subplot(2,2,1);
+            r = real(ts.modulated);
+            l = imag(ts.modulated);
             scatter(r,l,'*');
             hold on
             grid on
             axis([-1 1,-1 1]);
             xlabel('I');
             ylabel('Q');
-            title(title_iq);
+            title('BPSK Signal Field, Tx','BPSK');
+
+            % 2. Rx Signal
+            subplot(2,2,2);
+            r = real(rs.modulated);
+            l = imag(rs.modulated);
+            scatter(r,l,'*');
+            hold on
+            grid on
+            axis([-1 1,-1 1]);
+            xlabel('I');
+            ylabel('Q');
+            title('Signal Field, Rx','BPSK');
+
+            % 3. Tx Data
+            subplot(2,2,3);
+            r = real(td.modulated);
+            l = imag(td.modulated);
+            scatter(r,l,'*');
+            hold on
+            grid on
+            axis([-1 1,-1 1]);
+            xlabel('I');
+            ylabel('Q');
+            title(' Data Field, Tx',title_iq_data);
+            
+            % 4, Rx Data
+            subplot(2,2,4);
+            r = real(rd.modulated);
+            l = imag(rd.modulated);
+            scatter(r,l,'*');
+            hold on
+            grid on
+            axis([-1 1,-1 1]);
+            xlabel('I');
+            ylabel('Q');
+            title(' Data Field, Rx',title_iq_data);
         end
     end
         
