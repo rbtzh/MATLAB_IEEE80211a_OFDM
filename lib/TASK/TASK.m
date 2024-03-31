@@ -138,7 +138,6 @@ classdef TASK
             rs = obj.rx_signal;
             td = obj.tx_data;
             rd = obj.rx_data;
-            rt = obj.code_rate;
 
             %% SIGNAL 检测发送与接收内容差异
             %TODO ABSTRACT THIS AS PROPERTIES AND METHODS OF TASK
@@ -151,7 +150,7 @@ classdef TASK
             if isGraph
                 %% 画出星座图
                 %% Draw Constellation diagram
-                obj.iq_figure_constellation(ts, rs, td, rd, rt)
+                obj.iq_figure_constellation(ts, rs, td, rd, obj.code_rate, obj.snr)
                 %% 画出瀑布图
             end
             
@@ -168,18 +167,21 @@ classdef TASK
             end
         end
 
-        function iq_figure_constellation(ts, rs, td, rd, rt)
+        function iq_figure_constellation(ts, rs, td, rd, rate, snr)
             
-            if rt == 1/2
+            if rate == 1/2
                 title_iq_data = 'BPSK';
-            elseif rt == 3/4
+                speed = 6;
+            elseif rate == 3/4
                 title_iq_data = '16QAM';
+                speed = 36;
             else
                 error("ERROR RATE")
             end
 
             % Draw Constellation diagram
             figure;
+            sgtitle(sprintf('Constellation Diagram \nData Rate = %d Mbps, AWGN SNR = %d dB', speed, snr))
             set(gcf,'unit','centimeters','position',[0 0 20 20]);
             % 1. Tx Signal
             subplot(2,2,1);
@@ -200,7 +202,7 @@ classdef TASK
             scatter(r,l,'*');
             hold on
             grid on
-            axis([-1 1,-1 1]);
+            axis([-0.5 0.5,-0.5 0.5]);
             xlabel('I');
             ylabel('Q');
             title('Signal Field, Rx','BPSK');
@@ -224,7 +226,7 @@ classdef TASK
             scatter(r,l,'*');
             hold on
             grid on
-            axis([-1 1,-1 1]);
+            axis([-0.5 0.5,-0.5 0.5]);
             xlabel('I');
             ylabel('Q');
             title(' Data Field, Rx',title_iq_data);
