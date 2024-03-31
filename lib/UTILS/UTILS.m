@@ -59,18 +59,25 @@ classdef UTILS
                 error(error_message)
             end
         end
-        function refresh_gui(b6,b36,msg,seed,snr,a1,a2,a3,a4)
+        function refresh_gui(b6,b36,msg,seed,snr,a1,a2,a3,a4, lamp)
             if b6.Value == true
                 trans_rate = 6;
             elseif b36.Value == true
                 trans_rate = 36;
             end
+            red = [0.85,0.33,0.10];
+            green = [0.47,0.67,0.19];
+            lamp.Color = green;
             message = msg.Value;
             scrambling_seed = str2num(seed.Value); %#ok<*ST2NM>
             snr_v = snr.Value;
             task = TASK(trans_rate, message,scrambling_seed, snr_v);
-            task = task.run();
-            [~, ~] = task.analyze_gui(a1, a2, a3, a4);
+            try
+                task = task.run();
+                [~, ~] = task.analyze_gui(a1, a2, a3, a4);
+            catch
+                lamp.Color = red;
+            end
         end
     end
 end
